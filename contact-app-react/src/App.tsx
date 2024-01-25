@@ -1,39 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState, useId } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import api from './api/contacts'
+import { Button } from 'antd';
+
+export type contact = {
+  id:string,
+  name:string,
+  email:string,
+}
+
 
 function App() {
 
 
+  const id = useId()
+
+  const [contacts, setContacts] = useState<contact[]>([])
+
+
+
 
   // Retrieve contacts
-
-  const contact =  async () =>{
+  const retriveContacts =  async () =>{
     const response  = await api.get("/contacts")
-    console.log({response})
     return response.data;
   }
+
+  // Add contact
+
+  const addContactHandler = async (contact:any) =>{
+      console.log(contact)
+      const request  =  {
+        id:id,
+        ...contact
+      }
+
+      const response = await api.post("/contacts",request)
+
+      //setContact((prevState)=>{prevState, ...contact })
+  }
+
+
+  useEffect(()=>{
+
+    const getAllContact = async () =>{
+      const allContact  =  await retriveContacts()
+
+      if(allContact) {
+        setContacts((prevState)=>allContact)
+      }
+    }
+
+    getAllContact();
+    
+  },[])
+
+
 
 
 
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+      <div>
+      <Button type="primary">Primary Button</Button>
+
+        <ul>
+          {
+            contacts?.map((contact:contact)=>{
+              return (<li>{contact?.name}</li>)
+            })
+          }
+          </ul>
+      </div>
     </div>
   );
 }
