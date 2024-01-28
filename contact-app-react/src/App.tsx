@@ -3,6 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import api from './api/contacts'
 import { Button } from 'antd';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import * as ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
+import ContactList from './components/ContactList';
 
 export type contact = {
   id:string,
@@ -10,71 +18,19 @@ export type contact = {
   email:string,
 }
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ContactList />,
+  },
+]);
+
 
 function App() {
 
-
-  const id = useId()
-
-  const [contacts, setContacts] = useState<contact[]>([])
-
-
-
-
-  // Retrieve contacts
-  const retriveContacts =  async () =>{
-    const response  = await api.get("/contacts")
-    return response.data;
-  }
-
-  // Add contact
-
-  const addContactHandler = async (contact:any) =>{
-      console.log(contact)
-      const request  =  {
-        id:id,
-        ...contact
-      }
-
-      const response = await api.post("/contacts",request)
-
-      //setContact((prevState)=>{prevState, ...contact })
-  }
-
-
-  useEffect(()=>{
-
-    const getAllContact = async () =>{
-      const allContact  =  await retriveContacts()
-
-      if(allContact) {
-        setContacts((prevState)=>allContact)
-      }
-    }
-
-    getAllContact();
-    
-  },[])
-
-
-
-
-
-
   return (
     <div className="App">
-    
-      <div>
-      <Button type="primary">Primary Button</Button>
-
-        <ul>
-          {
-            contacts?.map((contact:contact)=>{
-              return (<li>{contact?.name}</li>)
-            })
-          }
-          </ul>
-      </div>
+        <RouterProvider router={router} />
     </div>
   );
 }
