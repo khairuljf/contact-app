@@ -8,17 +8,20 @@ import { contact } from './types';
 
 export type contacts ={
   contacts:contact[],
-  setContactId: React.Dispatch<React.SetStateAction<string | undefined>>
+  setContactId: React.Dispatch<React.SetStateAction<string | undefined>>,
+  filterContact: (name: string) => void
 }
 
-export default function ContactList({contacts,setContactId}:contacts) {
+export default function ContactList({contacts,setContactId, filterContact}:contacts) {
 
   
 
     return (
       <div className="contact-list">
           <div className='search'>  
-            <input type='text' placeholder='Search contact' />
+            <input type='text' placeholder='Search contact' onChange={(e)=>{
+              filterContact(e.target.value)
+            }} />
             <Link to={'/add/'} >Add Contact</Link>
           </div>
         <div className='contacts'>

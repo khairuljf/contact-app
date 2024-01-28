@@ -20,8 +20,21 @@ function App() {
 
 const id = useId()
 
-const [contacts, setContacts] = useState<contact[]>([])
-const [contactId, setContactId] = useState<string>()
+const [contacts, setContacts] = useState<contact[]>([]);
+const [contactId, setContactId] = useState<string>();
+
+
+const filterContact = ( name: string) =>{
+    console.log(name)
+
+    const filterContact =  contacts.filter(contact => contact.name.toLowerCase().includes(name.toLowerCase()));
+
+
+    setContacts(filterContact);
+
+}
+
+
 
 
 
@@ -51,7 +64,7 @@ useEffect(()=>{
   return (
     <div className="app-wrapper">
        <Routes>
-          <Route path="/" element={<Contact contacts={contacts} setContactId={setContactId} contactId={contactId} />} />
+          <Route path="/" element={<Contact contacts={contacts} setContactId={setContactId} contactId={contactId} filterContact={filterContact} />} />
           <Route path="/add" element={<AddContactForm setContacts={setContacts} />} />
           <Route path="/edit/:contactId" element={<AddContactForm setContacts={setContacts} />} />
        </Routes>
