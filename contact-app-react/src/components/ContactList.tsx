@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import api from '../api/contacts'
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { contacts } from './types';
 
 export type contact = {
   id:string,
@@ -20,49 +21,11 @@ function App() {
 
 
 
-export default function ContactList() {
-    const id = useId()
+export default function ContactList({contacts}:contacts) {
 
-    const [contacts, setContacts] = useState<contact[]>([])
   
   
-  
-  
-    // Retrieve contacts
-    const retriveContacts =  async () =>{
-      const response  = await api.get("/contacts")
-      return response.data;
-    }
-  
-    // Add contact
-  
-    const addContactHandler = async (contact:any) =>{
-        console.log(contact)
-        const request  =  {
-          id:id,
-          ...contact
-        }
-  
-        const response = await api.post("/contacts",request)
-  
-        //setContact((prevState)=>{prevState, ...contact })
-    }
-  
-  
-    useEffect(()=>{
-  
-      const getAllContact = async () =>{
-        const allContact  =  await retriveContacts()
-  
-        if(allContact) {
-          setContacts((prevState)=>allContact)
-        }
-      }
-  
-      getAllContact();
-      
-    },[])
-  
+    
   
   
   
