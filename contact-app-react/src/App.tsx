@@ -12,7 +12,6 @@ import {
 import "./index.css";
 import ContactList, { contact } from './components/ContactList';
 import AddContactForm from './components/AddContact';
-import ErrorPage from './components/Error-page';
 import Contact from './components/Contact';
 
 
