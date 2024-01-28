@@ -13,6 +13,7 @@ import "./index.css";
 import ContactList from './components/ContactList';
 import AddContactForm from './components/AddContact';
 import ErrorPage from './components/Error-page';
+import Contact from './components/Contact';
 
 export type contact = {
   id:string,
@@ -24,20 +25,17 @@ const router = createBrowserRouter([
 
   {
     path: "/",
-    element: <ContactList />,
+    element: <Contact />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/add",
-        element: <AddContactForm />,
-      },
-      {
-        path: "/edit/:contactId",
-        element: <AddContactForm />,
-      },
-    ],
   },
-
+  {
+    path: "/add",
+    element: <AddContactForm />,
+  },
+  {
+    path: "/edit/:contactId",
+    element: <AddContactForm />,
+  },
 
 ]);
 
@@ -45,7 +43,9 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <div className="app-wrapper">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 

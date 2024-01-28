@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { Link } from 'react-router-dom';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -55,6 +56,7 @@ const AddContactForm: React.FC = () => (
         Submit
       </Button>
     </Form.Item>
+    <Link to={'/'} >Cancel</Link>
   </Form>
 );
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useId } from 'react';
 import logo from './logo.svg';
 import api from '../api/contacts'
 import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 export type contact = {
   id:string,
@@ -68,15 +69,17 @@ export default function ContactList() {
   
   
     return (
-      <div className="App">
-      
-        <div>
-        <Button type="primary">Primary Button</Button>
-  
+      <div className="contact-list">
+          <div className='search'>  
+            <input type='text' placeholder='Search contact' />
+            <Link to={'/add/'} >Add Contact</Link>
+          </div>
+        <div className='contacts'>
+        
           <ul>
             {
-              contacts?.map((contact:contact)=>{
-                return (<li>{contact?.name}</li>)
+              contacts?.map((contact:contact, index)=>{
+                return (<li key={index}>{contact?.name}</li>)
               })
             }
             </ul>
