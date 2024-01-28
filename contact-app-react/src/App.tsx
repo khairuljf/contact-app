@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import ContactList from './components/ContactList';
+import AddContactForm from './components/AddContact';
+import ErrorPage from './components/Error-page';
 
 export type contact = {
   id:string,
@@ -19,19 +21,31 @@ export type contact = {
 }
 
 const router = createBrowserRouter([
+
   {
     path: "/",
     element: <ContactList />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/add",
+        element: <AddContactForm />,
+      },
+      {
+        path: "/edit/:contactId",
+        element: <AddContactForm />,
+      },
+    ],
   },
+
+
 ]);
 
 
 function App() {
 
   return (
-    <div className="App">
-        <RouterProvider router={router} />
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
