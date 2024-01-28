@@ -10,15 +10,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import ContactList, { contact } from './components/ContactList';
 import AddContactForm from './components/AddContact';
 import Contact from './components/Contact';
-
-
-
-  
-
-
+import { contact } from './components/types';
 
 
 function App() {
@@ -27,7 +21,7 @@ function App() {
 const id = useId()
 
 const [contacts, setContacts] = useState<contact[]>([])
-
+const [contactId, setContactId] = useState<string>()
 
 
 
@@ -57,9 +51,9 @@ useEffect(()=>{
   return (
     <div className="app-wrapper">
        <Routes>
-          <Route path="/" element={<Contact contacts={contacts} />} />
-          <Route path="/add" element={<AddContactForm />} />
-          <Route path="/edit/:contactId" element={<AddContactForm />} />
+          <Route path="/" element={<Contact contacts={contacts} setContactId={setContactId} contactId={contactId} />} />
+          <Route path="/add" element={<AddContactForm setContacts={setContacts} />} />
+          <Route path="/edit/:contactId" element={<AddContactForm setContacts={setContacts} />} />
        </Routes>
     </div>
   );

@@ -3,34 +3,18 @@ import logo from './logo.svg';
 import api from '../api/contacts'
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { contacts } from './types';
+import { contact } from './types';
 
-export type contact = {
-  id:string,
-  name:string,
-  email:string,
+
+export type contacts ={
+  contacts:contact[],
+  setContactId: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-
-function App() {
-
+export default function ContactList({contacts,setContactId}:contacts) {
 
   
-}
 
-
-
-
-export default function ContactList({contacts}:contacts) {
-
-  
-  
-    
-  
-  
-  
-  
-  
     return (
       <div className="contact-list">
           <div className='search'>  
@@ -42,7 +26,11 @@ export default function ContactList({contacts}:contacts) {
           <ul>
             {
               contacts?.map((contact:contact, index)=>{
-                return (<li key={index}>{contact?.name}</li>)
+                return (<li onClick={(e)=>{
+                    console.log(e.target)
+                    setContactId((prevState)=>contact?.id)
+                }} 
+                key={index}>{contact?.name}</li>)
               })
             }
             </ul>

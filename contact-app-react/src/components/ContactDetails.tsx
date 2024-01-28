@@ -1,13 +1,20 @@
 import React from 'react'
-import { contactDetailsReceiveType } from './types'
+import { contact, contactDetailsReceiveType } from './types'
 
 
+export type contactDetailsProps ={
+  contacts:contact[],
+  contactId: string | undefined
+}
 
-export default function ContactDetails({id}:contactDetailsReceiveType) {
+
+export default function ContactDetails({contactId,contacts}:contactDetailsProps) {
+
+  const contactInfo  =  contacts.find((contact)=>contact?.id === contactId)
   
   return (
    <div className='details-wrap'>
-         <div>ContactDetails {id} </div>
+         <div>ContactDetails {contactId} {contactInfo?.name} </div>
    </div>
   )
 }

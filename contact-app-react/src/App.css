@@ -18,6 +18,37 @@
 
 }
 
+.search {
+  background: #dfd9d9;
+  padding: 20px;
+  border-radius: 5px 5px 0 0 ;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.search input {
+  height:40px;
+  border-radius:5px;
+  width:70%
+}
+
+.contacts {
+  background: #cdbbbb;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+.contacts ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contacts ul li {
+  margin-bottom: 10px;
+}
+
+
 .App {
   text-align: center;
 }
