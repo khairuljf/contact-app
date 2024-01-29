@@ -1,4 +1,7 @@
 
+body{
+  background: #b5b0b0;
+}
 .app-wrapper{
   width: 100%;
   height: 100vh;
@@ -10,11 +13,13 @@
 .app-wrapper .contact-list{
   max-width: 30%;
   width: 100%;
+  background: #cdbbbb;
 }
 
 .app-wrapper .details-wrap{
   max-width: 70%;
   width: 100%;
+  padding: 50px;
 
 }
 
@@ -34,10 +39,11 @@
 }
 
 .contacts {
-  background: #cdbbbb;
   padding: 20px;
   border-radius: 0 0 5px 5px;
 }
+
+
 .contacts ul {
   margin: 0;
   padding: 0;
@@ -46,7 +52,36 @@
 
 .contacts ul li {
   margin-bottom: 10px;
+  border-radius: 4px;
 }
+.contacts ul li span{
+  text-transform: capitalize;
+}
+.contacts ul li:nth-child(odd) {
+  background: #ddd;
+  padding: 10px;
+}
+.contacts ul li:nth-child(even){
+  background: #ddd;
+  padding: 10px;
+}
+
+.contacts .single-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-wrapper .details-wrap h1.title {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.username, .email, .phone {
+  font-size: 20px;
+}
+
 
 
 .App {

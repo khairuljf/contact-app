@@ -1,47 +1,17 @@
 {
   "contacts": [
     {
-      "id": "1",
-      "name": "khairul",
-      "email": "khairuljf@gmail.com"
-    },
-    {
-      "id": "2",
-      "name": "rubel",
-      "email": "rubel@gmail.com"
-    },
-    {
-      "id": "3",
-      "name": "josim",
-      "email": "josim@gmail.com"
-    },
-    {
-      "id": ":r27:",
-      "name": "khairu",
-      "email": "khairul2"
-    },
-    {
-      "id": ":r27:",
-      "name": "adf",
-      "email": "asdf"
-    },
-    {
       "id": ":r3:",
       "name": "faruk",
       "email": "faruk@gmail.com"
     },
     {
-      "id": ":r3:",
+      "id": ":r2:",
       "name": "Rihan",
       "email": "rihan@gmail.com"
     },
     {
-      "id": ":r3:",
-      "name": "sarwar",
-      "email": "sem@gmail.com"
-    },
-    {
-      "id": ":r3:",
+      "id": ":r4:",
       "name": "sarwar",
       "email": "sem@gmail.com"
     }

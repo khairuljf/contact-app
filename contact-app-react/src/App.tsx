@@ -14,8 +14,6 @@ function App() {
   const [contactId, setContactId] = useState<string>();
 
   const filterContact = (name: string) => {
-    console.log(name);
-
     const filterContact = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(name.toLowerCase())
     );
@@ -41,6 +39,20 @@ function App() {
     getAllContact();
   }, []);
 
+  const deleteContact = async (id: string) => {
+    const newContact = contacts?.filter((contact) => contact?.id !== id);
+    try {
+      const response: { data: contact } = await api.delete(`/contacts/${id}`);
+      console.log("res", response);
+      if (response.data) {
+        setContacts(newContact);
+      }
+    } catch (error) {
+      // Handle errors from the API call
+      console.error("Error while making the API call:", error);
+    }
+  };
+
   return (
     <div className="app-wrapper">
       <Routes>
@@ -52,6 +64,7 @@ function App() {
               setContactId={setContactId}
               contactId={contactId}
               filterContact={filterContact}
+              deleteContact={deleteContact}
             />
           }
         />

@@ -37,9 +37,6 @@ const AddContactForm = ({ setContacts }: SetContact) => {
       console.error("Error while making the API call:", error);
     }
 
-    const response = await api.post("/contacts", request);
-    if (response?.data) {
-    }
   };
 
   // Get failed message

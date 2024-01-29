@@ -1,3 +1,5 @@
+import { FolderViewOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { contact } from "./types";
@@ -29,14 +31,16 @@ export default function ContactList({
         <ul>
           {contacts?.map((contact: contact, index) => {
             return (
-              <li
-                onClick={(e) => {
-                  console.log(e.target);
-                  setContactId((prevState) => contact?.id);
-                }}
-                key={index}
-              >
-                {contact?.name}
+              <li key={index} className="single-contact">
+                <span>{contact?.name}</span>
+                <Button
+                  type="primary"
+                  icon={<FolderViewOutlined />}
+                  onClick={(e) => {
+                    console.log(e.target);
+                    setContactId((prevState) => contact?.id);
+                  }}
+                />
               </li>
             );
           })}

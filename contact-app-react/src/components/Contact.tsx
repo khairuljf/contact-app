@@ -8,6 +8,7 @@ export type contactProps = {
   setContactId: React.Dispatch<React.SetStateAction<string | undefined>>;
   contactId: string | undefined;
   filterContact: (name: string) => void;
+  deleteContact: (id: string) => void;
 };
 
 export default function Contact({
@@ -15,6 +16,7 @@ export default function Contact({
   contactId,
   setContactId,
   filterContact,
+  deleteContact,
 }: contactProps) {
   return (
     <>
@@ -23,7 +25,11 @@ export default function Contact({
         setContactId={setContactId}
         filterContact={filterContact}
       />
-      <ContactDetails contactId={contactId} contacts={contacts} />
+      <ContactDetails
+        contactId={contactId}
+        contacts={contacts}
+        deleteContact={deleteContact}
+      />
     </>
   );
 }
