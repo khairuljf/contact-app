@@ -14,6 +14,3 @@ export type contacts ={
 }
   
 
-export type SetContact = {
-    setContacts:React.Dispatch<React.SetStateAction<contact[]>>
-}
