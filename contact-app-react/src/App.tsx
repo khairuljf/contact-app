@@ -12,15 +12,14 @@ function App() {
   const id = useId();
 
   const [contacts, setContacts] = useState<contact[]>([]);
+  const [filter, setFilter] = useState("");
   const [contactId, setContactId] = useState<string>();
 
-  const filterContact = (name: string) => {
-    const filterContact = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(name.toLowerCase())
-    );
+  // Filter contact by name
 
-    setContacts(filterContact);
-  };
+  let filterContact = contacts.filter((contact) => {
+    return contact.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+  });
 
   // Retrieve contacts
   const retriveContacts = async () => {
@@ -40,6 +39,7 @@ function App() {
     getAllContact();
   }, []);
 
+  // Delete contact
   const deleteContact = async (id: string) => {
     const newContact = contacts?.filter((contact) => contact?.id !== id);
     try {
@@ -61,10 +61,10 @@ function App() {
           path="/"
           element={
             <Contact
-              contacts={contacts}
+              contacts={filterContact}
               setContactId={setContactId}
               contactId={contactId}
-              filterContact={filterContact}
+              filterContact={setFilter}
               deleteContact={deleteContact}
             />
           }
