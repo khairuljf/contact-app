@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { contact } from "./types";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
+import { useNavigate } from "react-router-dom";
 export type contactDetailsProps = {
   contacts: contact[];
   contactId: string | undefined;
@@ -13,6 +13,8 @@ export default function ContactDetails({
   contacts,
   deleteContact,
 }: contactDetailsProps) {
+  const navigate = useNavigate();
+
   const contactInfo = contacts.find((contact) => contact?.id === contactId);
 
   if (!contactInfo) {
@@ -33,8 +35,11 @@ export default function ContactDetails({
         <Button
           type="primary"
           icon={<EditOutlined />}
-
-          // onClick={() => enterLoading(1)}
+          onClick={() => {
+            navigate("/edit", {
+              state: { contact: contactInfo },
+            });
+          }}
         >
           Edit
         </Button>

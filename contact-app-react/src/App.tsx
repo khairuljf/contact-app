@@ -6,6 +6,7 @@ import AddContactForm from "./components/AddContact";
 import Contact from "./components/Contact";
 import { contact } from "./components/types";
 import "./index.css";
+import EditContactForm from "./components/EditContact";
 
 function App() {
   const id = useId();
@@ -73,8 +74,10 @@ function App() {
           element={<AddContactForm setContacts={setContacts} />}
         />
         <Route
-          path="/edit/:contactId"
-          element={<AddContactForm setContacts={setContacts} />}
+          path="/edit"
+          element={
+            <EditContactForm contacts={contacts} setContacts={setContacts} />
+          }
         />
       </Routes>
     </div>
