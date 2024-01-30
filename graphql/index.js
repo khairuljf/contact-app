@@ -19,7 +19,7 @@ const resolvers = {
         },
         
         contact: async (parent, {id}) => {
-            const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`)
+            const response = await axios.get(`http://localhost:3006/contacts/${id}`)
             const animeData = response.data.data;
 
             const genres = animeData.genres.map((genre) => ({
