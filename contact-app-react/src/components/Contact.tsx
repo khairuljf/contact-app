@@ -27,7 +27,6 @@ export default function Contact({
       />
       <ContactDetails
         contactId={contactId}
-        contacts={contacts}
         deleteContact={deleteContact}
       />
     </>
