@@ -12,13 +12,13 @@ import {typeDefs } from './schema.js'
 const resolvers = {
     Query:{
 
-        animes: async (parent, {id}) => {
+        contacts: async (parent, {id}) => {
             const response = await axios.get(`http://localhost:3006/contacts`)
-            const animeData = response.data.data;
+            const animeData = response.data;
             return animeData
         },
         
-        anime: async (parent, {id}) => {
+        contact: async (parent, {id}) => {
             const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`)
             const animeData = response.data.data;
 

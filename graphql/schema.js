@@ -41,34 +41,17 @@ export const typeDefs = `#graphql
     }
 ## from api
 
-    type Anime {
-        mal_id: ID!
-        title: String
-        title_japanese: String
-        images: AnimeImages
-        episodes: Int
-        synopsis: String
-        genres: [Genre]
+    type contact {
+        id: ID!
+        name: String
+        email: String
+       
     }
-    type AnimeImages {
-        jpg: AnimeImage
-        webp: AnimeImage
-    }
-  
-  type AnimeImage {
-    image_url: String
-    small_image_url: String
-    large_image_url: String
-  }
-  
-  type Genre {
-    mal_id: ID!
-    name: String
-  }
+
 
   type Query {
-    animes:[Anime]
-    anime(id: ID!): Anime
+    contacts:[contact]
+    contact(id: ID!): contact
   }
 
 `
