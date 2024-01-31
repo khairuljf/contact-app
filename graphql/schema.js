@@ -1,44 +1,4 @@
 export const typeDefs = `#graphql
-
-## From local file 
-    type Game{
-        id:ID!,
-        title:String!,
-        platform:[String!]!
-    }
-
-    type Review{
-        id:ID!,
-        rating:Int!,
-        content:String!
-    }
-
-    type Author{
-        id:ID!,
-        name:String!,
-        verified:Boolean!
-    }
-
-    type Query {
-        reviews:[Review]
-        review(id:ID!):Review
-        games:[Game]
-        game(id:ID!):Game
-        authors:[Author]
-        author(id:ID!):Author
-    }
-
-
-    type Mutation{
-        addGame(game:AddGameInput!):Game
-        deleteGame(id:ID!):[Game]
-        updateGame(id:ID!, edits:AddGameInput!):Game
-    }
-
-    input AddGameInput{
-        title:String!,
-        platform:[String]
-    }
 ## from api
 
     type contact {
@@ -54,4 +14,14 @@ export const typeDefs = `#graphql
     contact(id: ID!): contact
   }
 
+   type Mutation{
+        addContact(contact:AddContactInput!):contact
+        deleteContact(id:ID!):[contact]
+        updateContact(id:ID!, edits:AddContactInput!):contact
+    }
+
+    input AddContactInput{
+        name:String!,
+        email:[String]
+    }
 `

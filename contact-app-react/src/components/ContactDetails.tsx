@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../api/contacts";
 import { useEffect, useState } from "react";
+import { GET_CONTACT_DETAILS } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
 
 export type contactDetailsProps = {
   contactId: string | undefined;
@@ -18,6 +20,8 @@ export default function ContactDetails({
   const navigate = useNavigate();
 
   const [contactDetails, setContactDetails] = useState<contact | null>(null);
+
+  /** Fetch data from json server by axios  */
 
   const getContactDetails = async (contactId: string) => {
     try {
@@ -35,9 +39,16 @@ export default function ContactDetails({
     }
   };
 
-  useEffect(() => {
-    if (contactId) getContactDetails(contactId as string);
+  /**Query by apollow grapql */
 
+  const { loading, error, data } = useQuery(GET_CONTACT_DETAILS, {
+    variables: { id: contactId },
+  });
+
+  console.log("contact details", data);
+
+  useEffect(() => {
+    //if (contactId) getContactDetails(contactId as string);
     //
   }, [contactId]);
 
@@ -45,15 +56,16 @@ export default function ContactDetails({
     return null;
   }
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <div className="details-wrap">
       <div className="contact-details">
         <h1 className="title">Contact Details</h1>
-        <div className="username">
-          Name : {contactId} {contactDetails?.name}{" "}
-        </div>
+        <div className="username">Name : {data?.contact?.name} </div>
         <div className="phone"></div>
-        <div className="email">Email : {contactDetails?.email}</div>
+        <div className="email">Email : {data?.contact?.email}</div>
       </div>
       <div className="action-contact">
         <Button
@@ -61,7 +73,7 @@ export default function ContactDetails({
           icon={<EditOutlined />}
           onClick={() => {
             navigate("/edit", {
-              state: { contact: contactDetails },
+              state: { contact: data?.contact },
             });
           }}
         >
@@ -71,7 +83,7 @@ export default function ContactDetails({
           type="primary"
           icon={<DeleteOutlined />}
           danger
-          onClick={() => deleteContact(contactDetails?.id)}
+          onClick={() => deleteContact(data?.contact?.id)}
         >
           Delete
         </Button>

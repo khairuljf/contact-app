@@ -14,57 +14,33 @@ const resolvers = {
 
         contacts: async (parent, {id}) => {
             const response = await axios.get(`http://localhost:3006/contacts`)
-            const animeData = response.data;
-            return animeData
+            const contacts = response.data;
+            return contacts
         },
         
         contact: async (parent, {id}) => {
             const response = await axios.get(`http://localhost:3006/contacts/${id}`)
-            const animeData = response.data.data;
-
-            const genres = animeData.genres.map((genre) => ({
-                mal_id: genre.mal_id,
-                name: genre.name
-            }))
+            const ContactData = response.data;
 
             return {
-                mal_id: animeData.mal_id,
-                title: animeData.title,
-                images: animeData.images,
-                episodes: animeData.episodes,
-                synopsis: animeData.synopsis,
-                genres: genres,
+                id: ContactData.id,
+                name: ContactData.name,
+                email: ContactData.email,
+               
             }
         },
 
-        games(){
-            return db.games
-        },
-        game(_, args ){
-            return db.games.find((review)=>review.id === args.id)
-        },
-        authors(){
-            return db.authors
-        },
-        author(_, args ){
-            return db.authors.find((review)=>review.id === args.id)
-        },
-        reviews(){
-            return db.reviews
-        },
-        review(_, args ){
-            return db.reviews.find((review)=>review.id === args.id)
-        },
+    
 
     },
 
     Mutation :{
 
-        deleteGame(_, args){
+        deleteContact(_, args){
             return db.games.map((game)=>game.id !== args.id)
         },
 
-        addGame(_, args){
+        addContact(_, args){
 
             let game = {
                 ...args.game,
@@ -77,7 +53,7 @@ const resolvers = {
 
         },
 
-        updateGame(_, agrs){
+        updateContact(_, agrs){
 
             db.games = db.games.map((g)=>{
                 if(g.id===agrs.id){

@@ -7,27 +7,37 @@ import Contact from "./components/Contact";
 import { contact } from "./components/types";
 import "./index.css";
 import EditContactForm from "./components/EditContact";
+import { useQuery } from "@apollo/client";
+import { GET_CONTACTS } from "./graphql/queries";
 
 function App() {
   const id = useId();
-
+  const { loading, error, data } = useQuery(GET_CONTACTS);
   const [contacts, setContacts] = useState<contact[]>([]);
   const [filter, setFilter] = useState("");
   const [contactId, setContactId] = useState<string>();
 
+  console.log("loading", loading);
+  console.log("data", data?.contacts);
+
   // Filter contact by name
 
-  let filterContact = contacts.filter((contact) => {
-    return contact.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+  let filterContact = contacts?.filter((contact) => {
+    return contact?.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
   });
 
   // Retrieve contacts
-  const retriveContacts = async () => {
-    const response = await api.get("/contacts");
-    return response.data;
-  };
+  // const retriveContacts = async () => {
+  //   const response = await api.get("/contacts");
+  //   return response.data;
+  // };
+
+  // if (data) {
+  //   setContacts((prevState) => data?.contacts);
+  // }
 
   useEffect(() => {
+    /*
     const getAllContact = async () => {
       const allContact = await retriveContacts();
 
@@ -37,7 +47,9 @@ function App() {
     };
 
     getAllContact();
-  }, []);
+*/
+    setContacts((prevState) => data?.contacts);
+  }, [data]);
 
   // Delete contact
   const deleteContact = async (id: string) => {
@@ -53,6 +65,9 @@ function App() {
       console.error("Error while making the API call:", error);
     }
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="app-wrapper">
